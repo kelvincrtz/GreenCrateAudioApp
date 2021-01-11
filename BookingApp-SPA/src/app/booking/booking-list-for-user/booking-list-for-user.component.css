@@ -1,0 +1,60 @@
+.slider { 
+    overflow-y: scroll;
+    height: 600px;
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2);
+}
+
+.btn-circle { 
+    width: 32px; 
+    height: 32px; 
+    padding: 6px 0px; 
+    border-radius: 15px; 
+    font-size: 11px; 
+    text-align: center; 
+}
+
+hr {
+    border-color: rgb(60, 119, 207);
+}
+
+@-webkit-keyframes pulse {
+    0% { background-color: #eeff00; }
+    50% { background-color: #FFF; }
+    100% { background-color: #eeff00; }
+  }
+
+  @-moz-keyframes pulse {
+    0% { background-color: #eeff00; }
+    50% { background-color: #FFF; }
+    100% { background-color: #eeff00; }
+  }
+
+  @-o-keyframes pulse {
+    0% { background-color: #eeff00; }
+    50% { background-color: #FFF; }
+    100% { background-color: #eeff00; }
+  }
+
+  @keyframes pulse {
+    0% { background-color: #eeff00; }
+    50% { background-color: #FFF; }
+    100% { background-color: #eeff00; }
+  }
+
+  .element {
+    background: #eeff00;
+    -webkit-animation: pulse 3s infinite; /* Safari 4+ */
+    -moz-animation:    pulse 3s infinite; /* Fx 5+ */
+    -o-animation:      pulse 3s infinite; /* Opera 12+ */
+    animation:         pulse 3s infinite; /* IE 10+, Fx 29+ */
+  }

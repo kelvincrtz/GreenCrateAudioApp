@@ -1,0 +1,10 @@
+<div class="container alert bg-signature mt-3" role="alert">
+  <h4 class="alert-heading">User Management System</h4>
+  <div>Use this page to change or promote the position of any <strong>Users</strong> in the system</div>
+  <div> <strong class="bg-danger">WARNING!</strong> changing their positions to <strong class="bg-dark">Admin</strong> or <strong class="bg-dark">Moderator</strong> will give them access to sensitive and secured information.</div>
+
+  <div class="container p-3" *appHasRole="['Admin']">
+    <app-user-management></app-user-management>
+  </div>
+
+</div>

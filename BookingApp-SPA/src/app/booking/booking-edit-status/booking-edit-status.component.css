@@ -1,0 +1,18 @@
+.bg-custom {
+    background: linear-gradient(150deg, #285bc9 0%, #2ca4db 40%);
+    border-radius: 0.80em;
+}
+
+.card-custom {
+    background: linear-gradient(140deg, #d491b3 0%, #cf89ba 40%);
+    border-radius: 0.60em;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.bg-danger-custom {
+    background-color: rgb(187, 93, 93)
+}
+
+.bg-success-custom {
+    background-color: rgb(44, 167, 85)
+}

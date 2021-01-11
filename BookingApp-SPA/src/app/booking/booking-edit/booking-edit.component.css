@@ -1,0 +1,30 @@
+.alert-custom {
+    background: linear-gradient(50deg, #3c67c2 0%, #1db386 40%);
+    border-radius: 0.50em;
+}
+
+.custom-title {
+    font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', sans-serif;
+    font-size: 3em;
+    font-weight: 800;
+    height: 4em;
+    width: 64em;
+    padding: 0.1em 1em;
+    border-radius: 0.75em;
+    display: table-cell;
+    vertical-align: middle;
+    letter-spacing: -2px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background: linear-gradient(120deg, #b5f8f3 0%, #5ac8fa 40%);
+}
+
+.btn-circle { 
+    width: 30px; 
+    height: 30px; 
+    padding: 6px 0px; 
+    border-radius: 15px; 
+    font-size: 12px; 
+    text-align: center; 
+}
+
+  

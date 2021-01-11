@@ -1,0 +1,191 @@
+<div class="container alert bg-signature mt-3" role="alert">
+  <div class="d-flex justify-content-between">
+    <h4 class="alert-heading">Hi {{ this.name | titlecase}}!</h4> 
+    <button type="button" class="btn btn-light btn-circle element" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"><i class="fa fa-info-circle"></i> 
+    </button>
+  </div>
+  <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true" class="mt-1">
+    <div class="">Use this page to manage all your booking requests.</div>
+    <div>Wait for the Administrator to process and review your booking request. You will be notified and if its <strong>approved</strong>, you can start making the payment.</div>
+    <div>You can also write a review once you've completed your booking</div>
+    <div class=""><small class="text-muted">NOTE:</small> You are not allowed to edit any request that has been <strong>Approved</strong> or <strong>Declined</strong></div>
+  </div>
+  <hr>
+
+  <div class="d-flex justify-content-between">
+    <div class="btn-group">
+      <button type="button" name="eventstoday" class="btn" tooltip="Shows the events happening today" [delay]="500" [value]="true" 
+        [(ngModel)]="bookingParams.eventstoday" [ngClass]="bookingParams.eventstoday ? 'btn-success active' : 'btn-secondary'" (click)="loadToday()" btnRadio="eventstoday">Today</button>
+
+      <button type="button" name="eventstoday" class="btn" tooltip="Shows the events happening tomorrow" [delay]="500" [value]="true" 
+      [(ngModel)]="bookingParams.eventstomorrow" [ngClass]="bookingParams.eventstomorrow ? 'btn-success active' : 'btn-secondary'" (click)="loadTomorrow()" btnRadio="eventstomorrow">Tomorrow</button>
+  
+      <button type="button" name="eventsthismonth" class="btn" tooltip="Shows the events happening this month" [delay]="500" [value]="true" 
+      [(ngModel)]="bookingParams.eventsthismonth" [ngClass]="bookingParams.eventsthismonth ? 'btn-success active' : 'btn-secondary'" (click)="loadMonth()" btnRadio="eventsthismonth">This Month</button>
+  
+      <button type="button" name="eventsall" class="btn" tooltip="Shows all the events" [delay]="500" [value]="true" 
+        [ngClass]="bookingParams.all ? 'btn-success active' : 'btn-secondary'" (click)="loadAll()" btnRadio="eventsall">All Events</button>
+    </div>
+
+    <div class="btn-group float-right my-1">
+      <button type="button" name="orderBy" class="btn btn-info" tooltip="Sorts the events by newest request" [delay]="500"
+        [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="dateadded">Newest Request</button>
+      <button type="button" name="orderBy" class="btn btn-info" tooltip="Sorts results by actual event date" [delay]="500"
+        [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="when">By Event Date</button>
+    </div>
+  </div>
+
+  <div *ngIf="bookingParams.eventstoday == true && bookings.length">
+    <h2 class="d-flex justify-content-center font-weight-light">Events Today</h2>
+    <div *ngIf="bookings.length > 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} events found</div>
+    <div *ngIf="bookings.length == 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} event found</div>
+  </div>
+  <div *ngIf="bookingParams.eventstomorrow == true && pagination.totalItems">
+    <h2 class="d-flex justify-content-center font-weight-light">Events Tomorrow</h2>
+    <div *ngIf="pagination.totalItems > 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} events found</div>
+    <div *ngIf="pagination.totalItems == 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} event found</div>
+  </div>
+  <div *ngIf="bookingParams.eventsthismonth == true && bookings.length">
+    <h2 class="d-flex justify-content-center font-weight-light">Events this Month</h2>
+    <div *ngIf="bookings.length > 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} events found</div>
+    <div *ngIf="bookings.length == 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} event found</div>
+  </div>
+  <div *ngIf="bookingParams.all == true && bookings.length">
+    <h2 class="d-flex justify-content-center font-weight-light">All Events</h2>
+    <div *ngIf="bookings.length > 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} events found</div>
+    <div *ngIf="bookings.length == 1" class="d-flex justify-content-center small mt-n2">{{bookings.length}} event found</div>
+  </div>
+
+  <div class="d-flex justify-content-center" *ngIf="bookings.length== 0">
+    <h3>No results found</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let booking of bookings">
+      <div class="card text-dark font-weight-light mt-2 h-95">
+        <div>
+          <div class="card-header border-white">  
+            <div class="text-muted d-flex justify-content-between">Status</div>
+            <div class="d-flex justify-content-between">
+              <div *ngIf="booking.status == 'Approved' && !compareDates(booking.when)" class="text-success">{{booking.status}}</div>
+              <div *ngIf="booking.status == 'Declined' && !compareDates(booking.when)" class="text-danger">{{booking.status}}</div>
+              <div *ngIf="booking.status == 'Pending' && !compareDates(booking.when)" class="text-secondary">{{booking.status}}</div>
+              <div *ngIf="booking.status == 'Cancelled'" class="text-secondary">
+                <span class="badge badge-danger font-italic">{{booking.status}}</span>
+              </div>
+              <div *ngIf="compareDates(booking.when)" class="text-dark">Expired</div>
+              <span class="badge badge-pill badge-info font-italic" *ngIf="booking.isEdited && !compareDates(booking.when)">Edited</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="text-dark">
+              <h5 class="card-title text-capitalize">{{booking.location}}</h5>
+              <div class="card-text font-weight-lighter"> When: {{booking.when | date}} </div>
+              <div class="card-text font-weight-lighter">From {{booking.fromTime | date: 'shortTime' }} to {{booking.toTime | date: 'shortTime' }}</div>
+            </div>
+  
+            <div class="btn-group btn-block btn-group-sm" *ngIf="userId == authDecodeToken && booking.status != 'Cancelled'">
+              <button type="button" (click)="openEditModal(booking)" class="btn btn-primary" tooltip="Click to edit request" [delay]="500"
+                [disabled]="booking.status == 'Approved' || booking.status == 'Declined'">Edit</button>
+              <button type="button" class="btn btn-danger" (click)="openModal(template)" tooltip="Click to delete this request" [delay]="500"
+                [disabled]="booking.status == 'Approved'">Delete</button>
+              <ng-template #template>
+                <div class="modal-body text-center">
+                  <p>Do you want to delete this request?</p>
+                  <button type="button" class="btn btn-default" (click)="confirm(booking.id)" >Yes</button>
+                  <button type="button" class="btn btn-primary" (click)="decline(booking.id)" >No</button>
+                </div>
+              </ng-template>
+            </div>
+
+            <div class="btn-group btn-block btn-group-sm" *ngIf="userId == authDecodeToken && booking.status == 'Cancelled'">
+              <button class="btn btn-danger" (click)="openCancellationTC(template4)">Terms & Conditions for Cancellation</button>
+            </div>
+
+            <ng-template #template3>
+              <div class="modal-body text-center">
+                <p>Do you want to cancel this booking request?</p>
+                <button type="button" class="btn btn-default" (click)="confirmCancel(booking.id, booking)">Yes</button>
+                <button type="button" class="btn btn-primary" (click)="declineCancel()">No</button>
+              </div>
+            </ng-template>
+  
+          </div>
+          <div class="card-footer border-white">
+            <div>
+              <small class="font-weight-lighter">Submitted on <span class="badge badge-dark">{{booking.dateAdded | date: 'fullDate'}}</span></small>
+              <div *ngIf="booking.status == 'Approved'">
+                <div *ngIf="!booking.isReviewed && !compareDates(booking.when)" class="btn-group btn-block btn-group-sm">
+                  <button class="btn btn-outline-info btn-sm mt-2" (click)="paymentInfo(template2)">Payment Info</button>
+                  <button class="btn btn-secondary btn-sm mt-2" (click)="cancelInfo(template3)">Cancel Booking</button>
+                </div>
+
+                <button *ngIf="!booking.isReviewed && compareDates(booking.when)" class="btn btn-outline-info btn-block btn-sm mt-2" (click)="review(booking.id)">Want to write a review? 
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i> 
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i> 
+                </button>
+
+                <button *ngIf="booking.isReviewed" class="btn btn-outline-secondary btn-block btn-sm mt-2">Review has been submitted
+                </button>
+
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <pagination [boundaryLinks]="true" 
+              [totalItems]="pagination.totalItems"
+              [itemsPerPage]="pagination.itemsPerPage"
+              [(ngModel)]="pagination.currentPage"
+              (pageChanged)="pageChanged($event)"
+              previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+  </pagination>
+</div>
+
+<ng-template #template2>
+  <div class="modal-body">
+    <div class="text-center">
+      <h5>Payment Information</h5>
+    </div>
+
+      <div class="mt-3">
+        <i class=""></i>Bank Account: ASB
+      </div>
+
+      <i class=""></i><strong> Credit Card or Bank Transfer</strong>
+      <div>Payment Bank Reference : Name must be last name</div>
+      <div>Upon approval payment needs to made 72hrs before the lesson</div>
+
+      <div class="mt-3">
+        <button type="button" class="btn btn-outline-success btn-circle" (click)="closePayment()">X</button>
+      </div>
+
+    </div>
+</ng-template>
+
+<ng-template #template4>
+  <div class="modal-body">
+    <div class="text-center">
+      <h5>Terms and Conditions for Cancellation</h5>
+    </div>
+
+      <i class=""></i><strong>Bank Transfer</strong>
+      <div>Payment Bank Reference : Name must be last name</div>
+      <div>A refundable amount of 50% the original cost</div>
+
+      <div class="mt-3">
+        <button type="button" class="btn btn-outline-primary btn-circle" (click)="closeCancellationTC()">X</button>
+      </div>
+
+    </div>
+</ng-template>
+

@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/bootswatch/dist/journal/bootstrap.min.css';
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+.bg-signature {
+  background: linear-gradient(50deg, #5885e7 0%, #5b75eb 80%);
+}
+
+.bg-signature-pink {
+  background: linear-gradient(50deg, #c56e97 0%, #ce7198 80%);
+}
+
+.bg-greencrate {
+  background: rgb(11, 146, 11);
+}

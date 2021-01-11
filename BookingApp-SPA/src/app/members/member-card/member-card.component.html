@@ -1,0 +1,10 @@
+<div class="card mb-3 h-95 font-weight-light bg-" style="width: 10p;">
+  <div class="card-body p-3">
+    <h5 class="card-title text-dark mb-1"><i class="fa fa-user"></i>{{' ' + user.userName}}</h5>
+    <div class="card-subtitle mb-2 text-muted">{{user.fullName | titlecase}}</div>
+    <div class="card-text text-muted"><i class="fa fa-home"></i>{{' ' + user.city}}</div>
+    <div class="card-text text-muted"><i class="fa fa-phone"></i>{{' ' + user.contactNumber}}</div>
+    <button class="btn btn-success btn-block mt-1" tooltip="Click to view the users detailed information" [delay]="500" [routerLink]="['/members/', user.id]">Profile</button>
+    <button class="btn btn-warning btn-block mt-1" tooltip="Click to message this user" [delay]="500" [routerLink]="['/members/', user.id]">Message</button>
+  </div>
+</div>

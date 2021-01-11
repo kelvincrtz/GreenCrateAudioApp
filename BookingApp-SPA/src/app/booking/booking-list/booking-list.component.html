@@ -1,0 +1,90 @@
+<div class="container alert bg-signature mt-3" role="alert">
+  <h4 class="alert-heading">Booking Query System</h4>
+  <hr>
+
+  <div class="d-flex justify-content-center py-2">
+
+      <form class="form-inline" #form="ngForm" (ngSubmit)="loadBookings()" novalidate>
+        
+        <div class="btn-group mr-2">
+          <button type="button" name="eventstoday" class="btn" tooltip="Shows the events happening today" [delay]="500"
+          [(ngModel)]="bookingParams.eventstoday" [ngClass]="bookingParams.eventstoday ? 'btn-success active' : 'btn-secondary'" (click)="loadToday()" [value]="true" btnRadio="eventstoday">Today</button>
+
+          <button type="button" name="eventstomorrow" class="btn" tooltip="Shows the events happening tomorrow" [delay]="500"
+          [(ngModel)]="bookingParams.eventstomorrow" [ngClass]="bookingParams.eventstomorrow ? 'btn-success active' : 'btn-secondary'" (click)="loadTomorrow()" [value]="true" btnRadio="eventstomorrow">Tomorrow</button>
+
+          <button type="button" name="eventsthismonth" class="btn" tooltip="Shows all the events for this current month" [delay]="500"
+          [(ngModel)]="bookingParams.eventsthismonth" [ngClass]="bookingParams.eventsthismonth ? 'btn-success active' : 'btn-secondary'" (click)="loadMonth()" [value]="true" btnRadio="eventsthismonth">This Month</button>
+
+          <button type="button" name="eventsall" class="btn" tooltip="Shows all the events" [delay]="500"
+          [(ngModel)]="bookingParams.all" [ngClass]="bookingParams.all ? 'btn-success active' : 'btn-secondary'" (click)="loadAll()" [value]="true" btnRadio="eventsall">All Events</button>
+        </div>
+
+        <div class="form-group mr-2 my-1">
+          <label for="Status">Status: </label>
+          <select name="status" id="status" class="form-control" [(ngModel)]="bookingParams.status" style="width: 130px;">
+              <option *ngFor="let status of statusList" [value]="status.value">
+                  {{status.display}}
+              </option>
+          </select>
+        </div>
+
+        <div class="btn-group my-1">
+          <button type="submit" class="btn btn-danger" tooltip="Applies the filtering option when clicked" [delay]="500">Apply Filter</button>
+          <button type="button" class="btn btn-dark" (click)="resetFilters()" tooltip="Resets all the filtering" [delay]="500" >Reset Filter</button>
+        </div>
+
+        <div class="col">
+          <div class="btn-group float-right my-1">
+            <button type="button" name="orderBy" class="btn btn-info btn-sm" tooltip="Sorts the request by Newly added request" [delay]="500"
+              [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="dateadded">Newest Request</button>
+            <button type="button" name="orderBy" class="btn btn-info btn-sm" tooltip="Sorts the event by the actual event date" [delay]="500"
+              [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="when">Decending Order</button>
+          </div>
+        </div> 
+      </form>
+  </div>
+
+  <div *ngIf="bookingParams.eventstoday == true && pagination.totalItems">
+    <h2 class="d-flex justify-content-center font-weight-light">Events Today</h2>
+    <div *ngIf="pagination.totalItems > 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} events found</div>
+    <div *ngIf="pagination.totalItems == 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} event found</div>
+  </div>
+  <div *ngIf="bookingParams.eventstomorrow == true && pagination.totalItems">
+    <h2 class="d-flex justify-content-center font-weight-light">Events Tomorrow</h2>
+    <div *ngIf="pagination.totalItems > 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} events found</div>
+    <div *ngIf="pagination.totalItems == 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} event found</div>
+  </div>
+  <div *ngIf="bookingParams.eventsthismonth == true && pagination.totalItems">
+    <h2 class="d-flex justify-content-center font-weight-light">Events this Month</h2>
+    <div *ngIf="pagination.totalItems > 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} events found</div>
+    <div *ngIf="pagination.totalItems == 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} event found</div>
+  </div>
+  <div *ngIf="bookingParams.all == true && pagination.totalItems">
+    <h2 class="d-flex justify-content-center font-weight-light">All Events</h2>
+    <div *ngIf="pagination.totalItems > 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} events found</div>
+    <div *ngIf="pagination.totalItems == 1" class="d-flex justify-content-center small mt-n2">{{pagination.totalItems}} event found</div>
+  </div>
+
+  <div class="d-flex justify-content-center" *ngIf="pagination.totalItems == 0">
+    <h3>No results found</h3>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let booking of bookings" class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
+      <app-booking-card [booking]="booking"></app-booking-card>
+    </div>
+  </div>
+  <div class="mb-4"></div>
+</div>
+
+
+<div class="d-flex justify-content-center">
+  <pagination [boundaryLinks]="true" 
+              [totalItems]="pagination.totalItems"
+              [itemsPerPage]="pagination.itemsPerPage"
+              [(ngModel)]="pagination.currentPage"
+              (pageChanged)="pageChanged($event)"
+              previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+  </pagination>
+</div>

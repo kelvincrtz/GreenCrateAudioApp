@@ -1,0 +1,98 @@
+<div class="container mt-4">
+  <div class="row">
+
+    <div *ngIf="user.id != authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
+      <div class="card bg-signature text-white">
+        <div class="card-body">
+          <div class="bg-signature">
+            <div class="container">
+              <app-member-messages [recipientId]="user.id"></app-member-messages>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-6 mt-2">
+      <div class="card bg-signature text-white">
+        <div class="card-body">
+          <div class="jumbotron body-custom bg-signature">
+            <div class="container">
+              <h1 class="display-4">{{user.fullName | titlecase}}</h1>
+              <p *ngIf="user.city!= null || user.country != null" class="lead text-white">Lives in {{user.city + ', '}} {{user.country}}</p>
+              <p class="lead text-white">Age: {{user.age}}</p>
+              <p *ngIf="user.contactNumber!= ''" class="lead text-white">Contact number: {{user.contactNumber}}</p>
+              <p class="lead text-white">Last active: {{user.lastActive | date : 'medium' }}</p>
+              <p *ngIf="user.id == authDecodeToken || authDecodeName === 'admin'" class="lead text-white">Member since: {{user.created | date }}</p>
+              <p *ngIf="user.id == authDecodeToken || authDecodeName === 'admin'" class="lead text-white">{{user.bookings.length}} total number of booking request</p>
+              <button *ngIf="user.id == authDecodeToken" class="btn btn-success btn-block" [routerLink]="['/bookingsforuser']">View Your Bookings</button>
+              <button *ngIf="user.id == authDecodeToken" class="btn btn-info btn-block" [routerLink]="['/bookingcalendar']">Make a Booking</button>
+              <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/member/edit']">Edit Profile</button>
+
+
+              <div *ngIf="user.city == null || user.contactNumber == null">
+                <div class="alert alert-danger mt-4" *ngIf="user.id == authDecodeToken || authDecodeName === user.userName">Thank you for signing up! You can add more information about your contact number and location by going
+                  <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-sm" [routerLink]="['/member/edit']">here</button>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="user.id == authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
+      <div class="card bg-signature text-white">
+        <div class="card-body">
+          <div class="body-custom2 bg-signature">
+            <div class="container">
+              <div>
+                <!-- Booking Alert Notifications -->
+                <div *ngIf="bookings?.length == 0 && messages?.length == 0">
+                  <h1 class="display-4 text-center">No notifications</h1>
+                </div>
+
+                <div *ngFor="let booking of bookings">
+
+                  <alert *ngIf="booking.status == 'Approved'" [type]='"success"' [dismissible]="dismissible" (onClosed)="onClosed(booking.id)">
+                    <h4 class="alert-heading">Heads up!</h4>
+                    Your booking request for {{booking.when | date : 'fullDate'}} at {{booking.location}} has been {{ booking.status | lowercase}}!
+                  </alert>
+
+                  <alert *ngIf="booking.status == 'Declined'" [type]='"danger"' [dismissible]="dismissible" (onClosed)="onClosed(booking.id)">
+                    <strong>Sorry</strong> but your booking request for {{booking.when | date : 'fullDate'}} at {{booking.location}} has been {{ booking.status | lowercase}}
+                    <p>
+                      <small>You can message the 
+                        <button class="btn btn-primary btn-sm" tooltip="Click to message the Admin" (click)="onClosed(booking.id)" [routerLink]="['/members/', 6]">Admin</button>
+                         to know why it was declined or <button class="btn btn-primary btn-sm" tooltip="Click to make a booking request" (click)="onClosed(booking.id)" [routerLink]="['/bookingcalendar']">Book</button> another request.
+                        </small>
+                    </p>
+                  </alert>
+
+                </div>
+
+                <!-- Message Alert Notification -->
+                <div *ngFor="let message of messages">
+                  <alert [type]='"info"' [dismissible]="dismissible" (onClosed)="onClosedMessage(message.id, message.recipientId)">
+                    <h4 class="alert-heading">Message!</h4>
+                    <a [routerLink]="['/members/', message.senderId]" class="alert-link" (click)="markMessageNotified(message.id, message.recipientId)">
+                        <span *ngIf="message.senderFullName != 'Administrator'">You have a new message from {{message.senderFullName}}</span>
+                        <span *ngIf="message.senderFullName === 'Administrator'">You have a new message from the {{message.senderFullName}}</span>
+                      </a>
+                    <div>
+                      <span class="small">Sent on {{message.messageSent | date : 'fullDate'}}</span>
+                    </div>
+                  </alert>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

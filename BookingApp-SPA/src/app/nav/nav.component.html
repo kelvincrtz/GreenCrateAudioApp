@@ -1,0 +1,60 @@
+<nav *ngIf="loggedIn()" class="navbar navbar-expand-md navbar-dark bg-dark" id="nagivation">
+  <div class="container">
+
+      <a *ngIf="!loggedIn()" class="navbar-brand" [routerLink]="['/home']">Green Crate Audio</a>
+      <a *ngIf="loggedIn()" class="navbar-brand" [routerLink]="['members', authService.decodedToken.nameid]">Green Crate Audio</a>
+  
+      <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
+        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/members']">Members</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/messages']">Messages</a>
+        </li>
+        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/bookings']">Bookings</a>
+        </li>
+        <li *appHasRole="['Member']" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/bookingsforuser']">Bookings</a>
+        </li>
+        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/admin']">Management</a>
+        </li>
+        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/calendar']">Calendar</a>
+        </li>
+        <li *appHasRole="['VIP', 'Member']" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/bookingcalendar']">Make a Booking</a>
+        </li>
+        <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/reviews/admin/', authService.decodedToken.nameid]">Reviews</a>
+        </li>
+      </ul>
+      
+    
+      <div *ngIf="loggedIn()" class="dropdown mr-3" dropdown>
+        <a class="dropdown-toggle text-light" dropdownToggle>
+          Welcome {{authService.decodedToken.unique_name | titlecase}}
+          <!--
+          <div *ngFor="let role of authService.decodedToken.role">
+            <div *ngIf="role.includes('Admin')"><i class="fa fa-adn"></i></div>
+          </div>
+           -->
+        </a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" [routerLink]="['members', authService.decodedToken.nameid]" routerLinkActive="router-link-active" ><i class="fa fa-address-card"></i> View Profile</a>
+          <a class="dropdown-item" [routerLink]="['/member/edit']"><i class="fa fa-edit"></i> Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
+        </div>
+      </div>
+    
+      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" type="text" name="username"
+          placeholder="Username" required [(ngModel)]="model.username">
+        <input class="form-control mr-sm-2" type="password" name="password" 
+          placeholder="Password" required [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+      </form>
+  </div>
+</nav>

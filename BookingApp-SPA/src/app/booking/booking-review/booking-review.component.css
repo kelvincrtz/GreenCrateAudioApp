@@ -1,0 +1,34 @@
+.para {
+    color: rgb(255, 255, 255);
+}
+
+.error-custom {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #d9534f;
+}
+
+.progress-bar {
+    background-color: #66d370;
+}
+
+.rating-signature {
+    border-radius: 80mm;
+}
+
+.blink-rating {
+    color: #fff;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 5px;
+    animation: blinkingBackground 2s infinite;
+}
+
+@keyframes blinkingBackground{
+    0%		{ background-color: #030303;}
+    25%		{ background-color: #cf0000;}
+    50%		{ background-color: #050505;}
+    75%		{ background-color: #cf0000;}
+    100%	{ background-color: #020202;}
+}

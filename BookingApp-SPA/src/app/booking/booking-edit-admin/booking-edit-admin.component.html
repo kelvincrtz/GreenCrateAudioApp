@@ -1,0 +1,45 @@
+<div class="modal-header">
+  <h3 class="">Adjust Time</h3>
+</div>
+<div class="modal-body">
+  <form class="" [formGroup]="bookingForm" (ngSubmit)="updateBookingRequest(template)">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-8 col-md-10 col-sm-12">
+
+            <div class="form-group">
+              <div title="From">From</div>
+              <timepicker [ngClass]="{'is-invalid': bookingForm.get('fromTime').errors && bookingForm.get('fromTime').touched}"
+              formControlName="fromTime"></timepicker>
+              <div class="alert alert-danger text-center" 
+                *ngIf="bookingForm.get('fromTime').value == null">
+                Start time is required
+              </div>
+            </div>
+          
+            <div class="form-group">
+              <div title="To">To</div>
+              <timepicker [ngClass]="{'is-invalid': bookingForm.get('toTime').errors && bookingForm.get('toTime').touched}"
+                formControlName="toTime"></timepicker>
+                <div class="alert alert-danger text-center" 
+                *ngIf="bookingForm.get('toTime').value == null">
+                  End time is required
+                </div>
+            </div>
+            <div class="form-group text-center">
+              <div class="btn-group" role="group">
+                <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid">Submit</button>
+                <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
+              </div>
+            </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm?</p>
+    <button type="button" class="btn btn-primary" (click)="confirm()" >Yes</button>
+    <button type="button" class="btn btn-default" (click)="decline()" >No</button>
+  </div>
+</ng-template>

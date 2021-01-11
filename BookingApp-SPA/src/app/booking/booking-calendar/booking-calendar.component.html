@@ -1,0 +1,198 @@
+<div class="container mt-3">
+  <div class="row text-center mt-3">
+    <div class="col-md-4" *ngIf="clickBooking == false">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()">
+          Previous
+      </div>
+        <div
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()">
+          Today
+        </div>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()">
+          Next
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4" *ngIf="clickBooking == false">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+  </div>
+
+  <div *ngIf="clickedDate && clickBooking == true" class="alert bg-signature text-center">
+    <h4 class="alert-heading">{{ clickedDate | date:'fullDate' }}</h4>
+
+    <div *ngIf="this.dayEvents.length == 0">
+      <span>No bookings here yet. Be the first to book a time slot! </span>
+    </div>
+
+    <div *ngFor="let day of dayEvents">
+      <div *ngIf="day.meta === 'Approved'">{{day.start| date:'shortTime'}} - {{day.end| date:'shortTime'}} is already booked</div>
+    </div>
+
+    <form class="container mt-1" [formGroup]="bookingForm" (ngSubmit)="registerBooking(template)">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="form-group">
+            <hr>
+            <div class="form-group">
+              <input type="text" [ngClass]="{'is-invalid': bookingForm.get('location').errors && bookingForm.get('location').touched}"
+              class="form-control" formControlName="location" placeholder="Student Location">
+              <div class="invalid-feedback">Student location is required</div>
+            </div>
+
+            <div class="form-group">
+              <div title="From">From</div>
+              <timepicker [ngClass]="{'is-invalid': bookingForm.get('fromTime').errors && bookingForm.get('fromTime').touched}"
+              formControlName="fromTime"></timepicker>
+              <div class="alert alert-danger text-center" 
+               *ngIf="bookingForm.get('fromTime').value == null">
+                <small>Start time is required</small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div title="To">To</div>
+              <timepicker [ngClass]="{'is-invalid': bookingForm.get('toTime').errors && bookingForm.get('toTime').touched}"
+                formControlName="toTime"></timepicker>
+                <div class="alert alert-danger text-center" 
+                *ngIf="bookingForm.get('toTime').value == null">
+                  <small>End time is required</small>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-group text-center">
+              <div class="btn-group" role="group">          
+                <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid" >Submit</button>
+                <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- 
+      <button type="button" class="btn btn-danger"  (click)="openModal(template)">Delete</button>
+  -->
+
+  <ng-template #template>
+    <div class="modal-body">
+      <div class="text-center">Your request has now been submitted. While you wait, please read our terms and conditions for payment information and other policies.
+      </div>
+      <div class="text-center mt-1">
+        <button type="button" class="btn btn-primary btn-circle" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"><i class="fa fa-info-circle"></i> Terms and Conditions
+        </button>
+      </div>
+      <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true" class="mt-1">
+        <hr>
+
+        <div class="mt-3">
+          <h4>Payment</h4>
+          <i class=""></i><strong> Credit Card or Bank Transfer</strong>
+          <div>Payment Bank Reference : Name must be last name</div>
+          <div>Upon approval payment needs to made 72hrs before the lesson</div>
+        </div>
+
+        <div class="mt-3">
+          <h4>Cancellation & Refunds </h4>
+          <div>Same day cancellation no refund</div>
+        </div>
+
+        <div class="mt-3">
+          <h4>No-show</h4>
+        </div>
+
+        <div class="">Use this page to manage all your booking requests.</div>
+        <div>Wait for the Administrator to process and review your booking request. You will be notified.</div>
+        <div class=""><small class="text-muted">NOTE:</small> You are not allowed to edit any request that has been <strong>Approved</strong> or <strong>Declined</strong></div>
+        
+        <div class="mt-3">
+          <button type="button" class="btn btn-outline-success btn-circle" (click)="closeModal()">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </ng-template>
+
+  <div *ngIf="clickMessage" class="alert alert-danger text-center">
+    <strong> {{ clickMessage }}</strong>
+    <div *ngFor="let day of this.dayEvents">
+     {{day.start| date:'shortTime'}} - {{day.end| date:'shortTime'}} is already booked
+    </div>
+  </div>
+
+  <ng-template #customCellTemplate let-day="day" let-locale="locale">
+    <!-- Fully Booked Days -->
+    <div class="cal-cell-top" (click)="notValidClick(day)" *ngIf="day.badgeTotal == 3 && day.date > todaysDate" style="background-color: lightcoral;">
+      <div>
+        <span class="cal-day-number text-light">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+        <!--
+        <div *ngFor="let event of day.events">
+          Where: {{ event.title }}
+          Start: {{ event.start | date:'shortTime'}}
+          End: {{ event.end | date:'shortTime' }}
+        </div>
+        -->
+      </div>
+    </div>
+
+    <!-- FULLY BOOKED -->
+    <small class="text-light text-center" style="background-color: lightcoral;" *ngIf="day.badgeTotal == 3 && day.date > todaysDate">FULLY BOOKED</small>
+
+    <!-- Still Available 1 Slot Left -->
+    <div class="cal-cell-top" (click)="validClick(day)" *ngIf="day.badgeTotal == 2 && day.date > todaysDate" style="background-color: lightskyblue;">
+      <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span> 
+    </div>
+    <small class="text-light text-center" style="background-color: lightskyblue;" *ngIf="day.badgeTotal == 2 && day.date > todaysDate">1 SLOT LEFT</small>
+
+    <!-- Still Available 2 Slots Left -->
+    <div class="cal-cell-top" (click)="validClick(day)" *ngIf="day.badgeTotal == 1 && day.date > todaysDate" style="background-color: lightskyblue;"> 
+      <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    </div>
+    <small class="text-light text-center" style="background-color: lightskyblue;" *ngIf="day.badgeTotal == 1 && day.date > todaysDate">2 SLOTS LEFT</small>
+    
+    <!-- Still Available Days -->
+    <div class="cal-cell-top" (click)="validClick(day)" *ngIf="day.badgeTotal < 3 && day.date > todaysDate && day.events == 0"> 
+      <div>
+        <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+      </div>
+    </div>
+
+    <!-- Expired -->
+    <div class="cal-cell-top" (click)="expiredCell(day)" *ngIf="day.date < todaysDate" style="background-color: lightgray;"> 
+        <span class="cal-day-number text-light">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    </div>
+    <small class="text-light text-center font-italic" style="background-color: lightgray;"  *ngIf="day.date < todaysDate">Expired</small>
+
+  </ng-template>
+  
+  <div [ngSwitch]="view" *ngIf="clickBooking == false">
+    <mwl-calendar-month-view
+      *ngSwitchCase="'month'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (columnHeaderClicked)="clickedColumn = $event.isoDayNumber"
+      [cellTemplate]="customCellTemplate">
+    </mwl-calendar-month-view>
+  </div>
+</div> 

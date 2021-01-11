@@ -1,0 +1,152 @@
+<div class="modal-header">
+  <h3 class="">Edit Booking Status</h3>
+</div>
+<div class="modal-body">
+  <div class="">
+    <div class="d-flex justify-content-center">
+      
+      <div *ngIf="event.meta === 'Pending'" class="card bg-secondary" style="width: 25rem;">
+        <div class="card-header bg-transparent text-dark">Status: <strong>{{event.meta}}</strong></div>
+          <div class="card-body text-dark">
+            <h5 class="card-text font-weight-light">Location: {{event.title}}</h5>
+            <h5 class="card-text font-weight-light">When: {{event.start | date}}</h5>
+            <h5 class="card-text font-weight-light">From: {{event.start  | date: 'shortTime' }} to {{event.end  | date: 'shortTime' }}</h5>
+
+            <hr>
+
+            <form class="para" [formGroup]="bookingForm" (ngSubmit)="updateBookingStatusRequest()">
+              <div class="justify-content-center">
+                <div class="col-12">
+                  
+                      <div class="form-group">
+                          <label for="inputState">Select:</label>
+                          <select id="inputState" formControlName="status" class="form-control">
+                            <option selected value="Approved">Approve</option>
+                            <option value="Declined">Decline</option>
+                          </select>
+                      </div>
+                    
+                      <div class="form-group text-center">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                          <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid" tooltip="Click to save changes" [delay]="500">Save</button>
+                          <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
+                        </div>
+                      </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer">
+            Request made by: <button class="btn btn-outline-dark text-capitalize" (click)="goToUser(user.id)">{{user?.fullName}}</button>
+          </div>
+        </div>
+
+      <div *ngIf="event.meta === 'Approved'" class="card bg-success-custom text-white mb-3" style="width: 25rem;">
+        <div class="card-header bg-transparent">Status: <strong>{{event.meta}}</strong></div>
+        <div class="card-body">
+          <h5 class="card-text font-weight-light">Location: {{event.title}}</h5>
+          <h5 class="card-text font-weight-light">When: {{event.start | date}}</h5>
+          <h5 class="card-text font-weight-light">From: {{event.start | date: 'shortTime' }} to {{event.end| date: 'shortTime' }}</h5>
+
+          <hr>
+
+          <form class="para" [formGroup]="bookingForm" (ngSubmit)="updateBookingStatusRequest()">
+            <div class="justify-content-center">
+              <div class="col-12">
+                
+                    <div class="form-group">
+                        <label for="inputState">Select:</label>
+                        <select id="inputState" formControlName="status" class="form-control">
+                          <option selected value="Approved">Approve</option>
+                          <option value="Declined">Decline</option>
+                        </select>
+                    </div>
+                  
+                    <div class="form-group text-center">
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                        <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid">Save</button>
+                        <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          Request made by: <button class="btn btn-outline-light text-capitalize" (click)="goToUser(user.id)">{{user?.fullName}}</button>
+        </div>
+      </div>
+
+      <div *ngIf="event.meta === 'Declined'" class="card bg-danger-custom text-white mb-3" style="width: 25rem;">
+        <div class="card-header bg-transparent">Status: <strong>{{event.meta}}</strong></div>
+        <div class="card-body">
+          <h5 class="card-text font-weight-light">Location: {{event.title}}</h5>
+          <h5 class="card-text font-weight-light">When: {{event.start | date}}</h5>
+          <h5 class="card-text font-weight-light">From: {{event.start | date: 'shortTime' }} to {{event.end | date: 'shortTime' }}</h5>
+
+          <hr>
+
+          <form class="para" [formGroup]="bookingForm" (ngSubmit)="updateBookingStatusRequest()">
+            <div class="justify-content-center">
+              <div class="col-12">
+                
+                    <div class="form-group">
+                        <label for="inputState">Select:</label>
+                        <select id="inputState" formControlName="status" class="form-control">
+                          <option selected value="Approved">Approve</option>
+                          <option value="Declined">Decline</option>
+                        </select>
+                    </div>
+                  
+                    <div class="form-group text-center">
+                      <div class="btn-group" role="group">
+                        <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid">Save</button>
+                        <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          Request made by: <button class="btn btn-outline-light text-capitalize" (click)="goToUser(user.id)">{{user?.fullName}}</button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm?</p>
+    <button type="button" class="btn btn-primary" (click)="confirm()" >Yes</button>
+    <button type="button" class="btn btn-default" (click)="decline()" >No</button>
+  </div>
+</ng-template>
+
+<ng-template #template2>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left text-capitalize">Hi {{this.authDecodeName}}!</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body mb-1">
+    <div class="font-weight-light">{{this.messageForAdmin}} </div>
+    <br>
+    <button *ngIf="modalRef" type="button" class="btn btn-danger" (click)="modalRef.hide()">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #template3>
+  <div class="modal-body text-center">
+    <div *ngIf="bookingForm.dirty" class="alert alert-danger mt-2">
+      <div>You have made changes. Any unsaved changes will be lost.</div>
+    </div>
+    <p>Go to user?</p>
+    <button type="button" class="btn btn-primary" (click)="confirmUser(bookingToGetUser.userId, template3)" >Yes</button>
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">No</button>
+  </div>
+</ng-template>

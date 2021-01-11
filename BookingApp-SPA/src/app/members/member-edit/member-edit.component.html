@@ -1,0 +1,47 @@
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-xl-6 col-lg-7 col-md-9 col-sm-12">
+      <div class="card bg-signature text-white">
+        <div class="card-body">
+          <div class="jumbotron bg-signature">
+            <div class="container">
+              <h1 class="display-4">Edit Your Profile</h1>
+              <form #editForm="ngForm" (ngSubmit)="updateUser()">
+                  <strong class="lead text-white">Name</strong>
+                  <p>
+                    <textarea name="fullName" rows="1" class="form-control" [(ngModel)]="user.fullName"></textarea>
+                  </p>
+                <div>
+                  <strong class="lead text-white">City</strong>
+                  <p>
+                    <textarea name="city" rows="1" class="form-control" [(ngModel)]="user.city"></textarea>
+                  </p>
+                </div>
+                <div>
+                  <strong class="lead text-white">Country</strong>
+                  <p>
+                    <textarea name="country" rows="1" class="form-control" [(ngModel)]="user.country"></textarea>
+                  </p>
+                </div>
+                <div>
+                  <strong class="lead text-white">Contact Number</strong>
+                  <p>
+                    <textarea name="contactNumber" rows="1" class="form-control" [(ngModel)]="user.contactNumber"></textarea>
+                  </p>
+                </div>
+                <button [disabled]="!editForm.dirty" class="btn btn-success btn-block">Save</button>
+              </form>
+
+              <button class="btn btn-info btn-block mt-2" (click)="cancel()">Cancel</button>
+
+              <div *ngIf="editForm.dirty" class="alert alert-danger mt-2">
+                <div>You have made changes. Any unsaved changes will be lost.</div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

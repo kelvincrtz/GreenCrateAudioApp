@@ -1,0 +1,59 @@
+<div class="container mt-3" role="alert">
+  <form class="container mt-3" [formGroup]="bookingForm" (ngSubmit)="registerBooking()">
+
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="m-4"></div>
+        <h2 class="custom-title">Make a Booking</h2>
+        <div class="m-4"></div>
+            <div class="form-group">
+              <input type="text" bsDatepicker [bsConfig]="bsConfig"
+              [ngClass]="{'is-invalid': bookingForm.get('when').errors && bookingForm.get('when').touched
+                  || bookingForm.get('when').touched && bookingForm.hasError('errordate')}" 
+              class="form-control" formControlName="when" placeholder="Date">
+              <div class="invalid-feedback" 
+                *ngIf="bookingForm.get('when').hasError('required') && bookingForm.get('when').touched">
+                Please choose a date
+              </div>
+              <div class="invalid-feedback"
+                *ngIf="bookingForm.get('when').touched && bookingForm.hasError('errordate')">
+                Please select a valid date
+              </div>
+            </div>
+      
+            <div class="form-group">
+              <input type="text" [ngClass]="{'is-invalid': bookingForm.get('location').errors && bookingForm.get('location').touched}"
+              class="form-control" formControlName="location" placeholder="Location">
+              <div class="invalid-feedback">Location is required</div>
+            </div>
+            
+            <div class="form-group">
+              <div title="From">From</div>
+              <timepicker [ngClass]="{'is-invalid': bookingForm.get('fromTime').errors && bookingForm.get('fromTime').touched}"
+              formControlName="fromTime"></timepicker>
+              <div class="alert alert-danger text-center" 
+               *ngIf="bookingForm.get('fromTime').value == null">
+                <small>Start time is required</small>
+              </div>
+            </div>
+          
+            <div class="form-group">
+              <div title="To">To</div>
+              <timepicker [ngClass]="{'is-invalid': bookingForm.get('toTime').errors && bookingForm.get('toTime').touched}"
+                formControlName="toTime"></timepicker>
+                <div class="alert alert-danger text-center" 
+                *ngIf="bookingForm.get('toTime').value == null">
+                  <small>End time is required</small>
+                </div>
+            </div>
+          
+            <div class="form-group text-center">
+              <div class="btn-group" role="group">          
+                <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid">Submit</button>
+                <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
+              </div>
+            </div>
+      </div>
+    </div>
+  </form>
+</div>
