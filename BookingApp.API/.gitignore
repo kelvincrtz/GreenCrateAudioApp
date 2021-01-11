@@ -3,3 +3,5 @@ bin
 obj
 *.db
 appsettings.json
+bookingappaudio.db-shm
+bookingappaudio.db-wal

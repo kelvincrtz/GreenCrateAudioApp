@@ -8,13 +8,9 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 .bg-signature {
-  background: linear-gradient(50deg, #5885e7 0%, #5b75eb 80%);
-}
-
-.bg-signature-pink {
-  background: linear-gradient(50deg, #c56e97 0%, #ce7198 80%);
+  background: linear-gradient(50deg, #08681d 0%, #045f2d 40%);
 }
 
 .bg-greencrate {
-  background: rgb(11, 146, 11);
+  background: linear-gradient(50deg, #000000 0%, #024621 80%);
 }
