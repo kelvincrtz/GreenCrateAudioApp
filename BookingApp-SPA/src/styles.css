@@ -14,3 +14,12 @@
 .bg-greencrate {
   background: linear-gradient(50deg, #000000 0%, #024621 80%);
 }
+
+@media only screen and (max-width: 1026px) {
+  .cal-month-view .cal-header .cal-cell {
+    font-size: 1.8vw;
+  }
+  .cal-week-view .cal-day-headers .cal-header {
+    font-size: 1.8vw;
+  }
+}

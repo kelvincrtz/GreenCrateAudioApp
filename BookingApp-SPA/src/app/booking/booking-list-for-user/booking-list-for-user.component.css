@@ -58,3 +58,9 @@ hr {
     -o-animation:      pulse 3s infinite; /* Opera 12+ */
     animation:         pulse 3s infinite; /* IE 10+, Fx 29+ */
   }
+
+  @media only screen and (max-width: 1026px) {
+    #fade {
+        display: none;
+    }
+  }

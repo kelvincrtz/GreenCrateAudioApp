@@ -5,30 +5,30 @@
       <div class="card bg-signature text-white">
         <div class="card-body">
           <div class="bg-signature">
-            <div class="container">
+            <div id="smallertext">
               <app-member-messages [recipientId]="user.id"></app-member-messages>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="col-sm-12 col-md-12 col-lg-6 mt-2">
+    
+    <!-- If user -->
+    <div *ngIf="user.id == authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
       <div class="card bg-signature text-white">
         <div class="card-body">
           <div class="jumbotron body-custom bg-signature">
             <div class="container">
               <h1 class="display-4">{{user.fullName | titlecase}}</h1>
-              <p *ngIf="user.city!= null || user.country != null" class="lead text-white">Lives in {{user.city + ', '}} {{user.country}}</p>
-              <p class="lead text-white">Age: {{user.age}}</p>
-              <p *ngIf="user.contactNumber!= ''" class="lead text-white">Contact number: {{user.contactNumber}}</p>
-              <p class="lead text-white">Last active: {{user.lastActive | date : 'medium' }}</p>
-              <p *ngIf="user.id == authDecodeToken || authDecodeName === 'admin'" class="lead text-white">Member since: {{user.created | date }}</p>
-              <p *ngIf="user.id == authDecodeToken || authDecodeName === 'admin'" class="lead text-white">{{user.bookings.length}} total number of booking request</p>
+              <p id="smallertext1"  *ngIf="user.city!= null || user.country != null" class="lead text-white">Lives in {{user.city + ', '}} {{user.country}}</p>
+              <p id="smallertext1"  class="lead text-white">Age: {{user.age}}</p>
+              <p id="smallertext1" *ngIf="user.contactNumber!= ''" class="lead text-white">Contact number: {{user.contactNumber}}</p>
+              <p id="smallertext1"  class="lead text-white">Last active: {{user.lastActive | date : 'medium' }}</p>
+              <p id="smallertext1"  *ngIf="user.id == authDecodeToken || authDecodeName === 'admin'" class="lead text-white">Member since: {{user.created | date }}</p>
+              <p id="smallertext1"  *ngIf="user.id == authDecodeToken || authDecodeName === 'admin'" class="lead text-white">{{user.bookings.length}} total number of booking request</p>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-success btn-block" [routerLink]="['/bookingsforuser']">View Your Bookings</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-info btn-block" [routerLink]="['/bookingcalendar']">Make a Booking</button>
               <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/member/edit']">Edit Profile</button>
-
 
               <div *ngIf="user.city == null || user.contactNumber == null">
                 <div class="alert alert-danger mt-4" *ngIf="user.id == authDecodeToken || authDecodeName === user.userName">Thank you for signing up! You can add more information about your contact number and location by going
@@ -36,6 +36,34 @@
                 </div>
               </div>
 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- If not user -->
+     <div id="fade" *ngIf="user.id != authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
+      <div class="card bg-signature text-white">
+        <div class="card-body">
+          <div class="jumbotron body-custom bg-signature">
+            <div class="container">
+              <h1 class="display-4">{{user.fullName | titlecase}}</h1>
+              <p id="smallertext1"  *ngIf="user.city!= null || user.country != null" class="lead text-white">Lives in {{user.city + ', '}} {{user.country}}</p>
+              <p id="smallertext1"  class="lead text-white">Age: {{user.age}}</p>
+              <p id="smallertext1" *ngIf="user.contactNumber!= ''" class="lead text-white">Contact number: {{user.contactNumber}}</p>
+              <p id="smallertext1"  class="lead text-white">Last active: {{user.lastActive | date : 'medium' }}</p>
+              <p id="smallertext1"  *ngIf="user.id == authDecodeToken || authDecodeName === 'admin'" class="lead text-white">Member since: {{user.created | date }}</p>
+              <p id="smallertext1"  *ngIf="user.id == authDecodeToken || authDecodeName === 'admin'" class="lead text-white">{{user.bookings.length}} total number of booking request</p>
+              <button *ngIf="user.id == authDecodeToken" class="btn btn-success btn-block" [routerLink]="['/bookingsforuser']">View Your Bookings</button>
+              <button *ngIf="user.id == authDecodeToken" class="btn btn-info btn-block" [routerLink]="['/bookingcalendar']">Make a Booking</button>
+              <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-block" [routerLink]="['/member/edit']">Edit Profile</button>
+
+              <div *ngIf="user.city == null || user.contactNumber == null">
+                <div class="alert alert-danger mt-4" *ngIf="user.id == authDecodeToken || authDecodeName === user.userName">Thank you for signing up! You can add more information about your contact number and location by going
+                  <button *ngIf="user.id == authDecodeToken" class="btn btn-warning btn-sm" [routerLink]="['/member/edit']">here</button>
+                </div>
+              </div>
 
             </div>
           </div>
@@ -43,7 +71,8 @@
       </div>
     </div>
 
-    <div *ngIf="user.id == authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
+
+    <div *ngIf="user.id == authDecodeToken && bookings?.length" class="col-sm-12 col-md-12 col-lg-6 mt-2">
       <div class="card bg-signature text-white">
         <div class="card-body">
           <div class="body-custom2 bg-signature">

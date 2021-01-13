@@ -3,7 +3,7 @@
     <div class="col-md-4">
       <div class="btn-group">
         <div
-          class="btn btn-primary"
+          class="btn btn-success"
           mwlCalendarPreviousView
           [view]="view"
           [(viewDate)]="viewDate"
@@ -18,7 +18,7 @@
           Today
         </div>
         <div
-          class="btn btn-primary"
+          class="btn btn-success"
           mwlCalendarNextView
           [view]="view"
           [(viewDate)]="viewDate"
@@ -33,19 +33,19 @@
     <div class="col-md-4">
       <div class="btn-group">
         <div
-          class="btn btn-primary"
+          class="btn btn-success"
           (click)="setView(CalendarView.Month)"
           [class.active]="view === CalendarView.Month">
           Month
         </div>
         <div
-          class="btn btn-primary"
+          class="btn btn-success"
           (click)="setView(CalendarView.Week)"
           [class.active]="view === CalendarView.Week">
           Week
         </div>
         <div
-          class="btn btn-primary"
+          class="btn btn-success"
           (click)="setView(CalendarView.Day)"
           [class.active]="view === CalendarView.Day">
           Day
@@ -73,7 +73,7 @@
       [refresh]="refresh"
       (eventClicked)="openModal($event.event, template)"
       [dayStartHour]="8"
-      [dayEndHour]="22">
+      [dayEndHour]="20">
     </mwl-calendar-week-view>
 
     <mwl-calendar-day-view
@@ -83,7 +83,7 @@
       [refresh]="refresh"
       (eventClicked)="openModal($event.event, template)"
       [dayStartHour]="8"
-      [dayEndHour]="22">
+      [dayEndHour]="20">
     </mwl-calendar-day-view>
   </div>
 

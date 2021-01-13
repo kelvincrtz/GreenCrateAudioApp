@@ -10,3 +10,18 @@
 .card{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
+
+@media only screen and (max-width: 1026px) {
+    #fade {
+        display: none;
+    }
+    #nopadding {
+        padding: 0%;
+    }
+    #smallertext {
+        font-size: 12px;
+    }
+    #smallertext1 {
+        font-size: 16px;
+    }
+}

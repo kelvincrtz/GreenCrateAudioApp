@@ -1,4 +1,4 @@
-<div class="container alert bg-signature mt-3" role="alert">
+<div class="container alert bg-signature text-white mt-3" role="alert">
   <div class="d-flex justify-content-between">
     <h4 class="alert-heading">Hi {{ this.name | titlecase}}!</h4> 
     <button type="button" class="btn btn-light btn-circle element" (click)="isCollapsed = !isCollapsed"
@@ -28,7 +28,7 @@
         [ngClass]="bookingParams.all ? 'btn-success active' : 'btn-secondary'" (click)="loadAll()" btnRadio="eventsall">All Events</button>
     </div>
 
-    <div class="btn-group float-right my-1">
+    <div id="fade" class="btn-group float-right my-1">
       <button type="button" name="orderBy" class="btn btn-info" tooltip="Sorts the events by newest request" [delay]="500"
         [(ngModel)]="bookingParams.orderBy" (click)="loadOrderBy()" btnRadio="dateadded">Newest Request</button>
       <button type="button" name="orderBy" class="btn btn-info" tooltip="Sorts results by actual event date" [delay]="500"
@@ -86,9 +86,9 @@
             </div>
   
             <div class="btn-group btn-block btn-group-sm" *ngIf="userId == authDecodeToken && booking.status != 'Cancelled'">
-              <button type="button" (click)="openEditModal(booking)" class="btn btn-primary" tooltip="Click to edit request" [delay]="500"
+              <button type="button" (click)="openEditModal(booking)" class="btn btn-success" tooltip="Click to edit request" [delay]="500"
                 [disabled]="booking.status == 'Approved' || booking.status == 'Declined'">Edit</button>
-              <button type="button" class="btn btn-danger" (click)="openModal(template)" tooltip="Click to delete this request" [delay]="500"
+              <button type="button" class="btn btn-primary" (click)="openModal(template)" tooltip="Click to delete this request" [delay]="500"
                 [disabled]="booking.status == 'Approved'">Delete</button>
               <ng-template #template>
                 <div class="modal-body text-center">

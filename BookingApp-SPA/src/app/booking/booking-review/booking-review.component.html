@@ -140,10 +140,10 @@
     </div>
     <div class="modal-body">
       <div *ngIf="rating > 1"> You have a rating of {{rating}} stars. Do you want to proceed?</div>
-      <div *ngIf="rating == 1"> You have a rating of {{rating}} star. Do you want to proceed?</div>
+      <div *ngIf="rating <= 1"> You have a rating of {{rating}} star. Do you want to proceed?</div>
       <div class="d-flex justify-content-center">
         <div class="mt-2 btn-group">
-          <button type="button" class="btn btn-primary" (click)="uploadSection(template)">Yes</button>
+          <button type="button" class="btn btn-primary" (click)="uploadSectionAfterModal(template)">Yes</button>
           <button type="button" class="btn btn-danger" (click)="modalRef2.hide()">No</button>
         </div>
       </div>
