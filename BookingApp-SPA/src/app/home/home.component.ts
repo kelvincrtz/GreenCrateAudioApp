@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   user: User;
   reviews: Review[];
   loginForm: FormGroup;
+  navbarOpen = false;
 
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router,
               private route: ActivatedRoute) { }
@@ -29,6 +30,10 @@ export class HomeComponent implements OnInit {
       userName: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
+  }
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
 
   loginClick() {

@@ -826,3 +826,42 @@ pre {
 	}
 }
 /* End  Media Query For Desktop */
+
+@media only screen and (max-width: 990px) {
+    #fade {
+        display: none;
+	}
+	#show {
+		display: block;
+	}
+	/* Hero */
+	#hero h1 {
+		font-size: 4rem;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	/* Hero */
+	#hero h1 {
+		font-size: 2.8rem;
+	}
+}
+
+.mobile {
+	display: none;
+}
+
+.nav-styled {
+	font-size: .8rem;
+	letter-spacing: .2rem;
+	text-decoration: none;
+	color: white;
+	text-transform: uppercase;
+	display: block;
+	margin-bottom: 8px;
+	text-align: right;
+}
+
+.nav-styled:hover {
+	color: rgb(0, 255, 76);
+} 
