@@ -174,7 +174,7 @@ export class BookingCalendarComponent implements OnInit {
       this.fixDate(this.bookingForm.get('toTime').value);
       this.booking = Object.assign({}, this.bookingForm.value);
       this.bookingService.createBooking(this.authService.decodedToken.nameid, this.booking).subscribe(next => {
-        this.alertify.success('Booking request has been submitted');
+        // this.alertify.success('Booking request has been submitted');
       }, error => {
         this.alertify.error('Error sending the request');
       }, () => {
