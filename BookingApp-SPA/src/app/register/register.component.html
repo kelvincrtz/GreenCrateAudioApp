@@ -80,7 +80,9 @@
   </div>
 
   <div class="form-group text-center">
-    <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Register</button>
-    <button class="btn btn-primary-outline" (click)="cancel()">Cancel</button>
+    <div class="btn-group">
+      <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Register</button>
+      <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </div>
   </div>
 </form>

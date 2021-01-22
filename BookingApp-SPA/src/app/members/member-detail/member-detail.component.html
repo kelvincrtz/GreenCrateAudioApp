@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container mt-3">
   <div class="row">
 
     <div *ngIf="user.id != authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
@@ -17,7 +17,7 @@
     <div *ngIf="user.id == authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
       <div class="card bg-signature text-white">
         <div class="card-body">
-          <div class="jumbotron body-custom bg-signature">
+          <div class="body-custom bg-signature">
             <div class="container">
               <h1 class="display-4">{{user.fullName | titlecase}}</h1>
               <p id="smallertext1"  *ngIf="user.city!= null || user.country != null" class="lead text-white">Lives in {{user.city + ', '}} {{user.country}}</p>
@@ -46,7 +46,7 @@
      <div id="fade" *ngIf="user.id != authDecodeToken" class="col-sm-12 col-md-12 col-lg-6 mt-2">
       <div class="card bg-signature text-white">
         <div class="card-body">
-          <div class="jumbotron body-custom bg-signature">
+          <div class="body-custom bg-signature">
             <div class="container">
               <h1 class="display-4">{{user.fullName | titlecase}}</h1>
               <p id="smallertext1"  *ngIf="user.city!= null || user.country != null" class="lead text-white">Lives in {{user.city + ', '}} {{user.country}}</p>

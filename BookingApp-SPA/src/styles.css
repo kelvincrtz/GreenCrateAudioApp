@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-@import '../node_modules/bootswatch/dist/journal/bootstrap.min.css';
+@import '../node_modules/bootswatch/dist/yeti/bootstrap.min.css';
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 @import '../node_modules/alertifyjs/build/css/alertify.min.css';
 @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
@@ -8,11 +8,15 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 .bg-signature {
-  background: linear-gradient(50deg, #097c22 0%, #067c3b 40%);
+  background: linear-gradient(50deg, #0cac2e 0%, #059144 40%);
 }
 
 .bg-greencrate {
   background: linear-gradient(50deg, #000000 0%, #024621 80%);
+}
+
+.cal-event-title {
+  text-transform: capitalize;
 }
 
 @media only screen and (max-width: 1026px) {

@@ -17,5 +17,6 @@ namespace BookingApp.API.Dtos
         public DateTime ApproveOrDeclineDate { get; set; }
         public bool IsReviewed { get; set; }
         public int UserId { get; set; }
+        public UserForUpdateDto User { get; set; }
     }
 }

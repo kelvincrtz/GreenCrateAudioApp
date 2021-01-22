@@ -76,7 +76,7 @@
           <h1 class="">CRATE<span></span></h1>
           <h1 class=""> AUDIO<span></span></h1>
           <a (click)="scrollToElement(testimonials)" type="button" class="cta">Reviews</a>
-          <a *ngIf="!loggedIn()" (click)="scrollToElement(login)" type="button" class="cta">Login</a>
+          <a *ngIf="!loggedIn()" (click)="scrollToElement(login)" type="button" class="cta">Log in</a>
           <a *ngIf="!loggedIn()" (click)="scrollToElement(register)" (click)="registerToggle()" type="button" class="cta">Sign Up</a>
         </div>
       </div>
@@ -93,7 +93,7 @@
             <div class="card-body">
               <form class="" [formGroup]="loginForm" (ngSubmit)="loginClick()">
                 <div class="">
-                  <h1>Login</h1>
+                  <h1>Log in</h1>
                   <div class="">
     
                         <div class="form-group">
@@ -110,7 +110,7 @@
             
                         <div class="form-group text-center">
                           <div class="btn-group" role="group">
-                            <button class="btn btn-success" type="submit" value="submit" id="submit" [disabled]="!loginForm.valid">Login</button>
+                            <button class="btn btn-success" type="submit" value="submit" id="submit" [disabled]="!loginForm.valid">Log in</button>
                             <button class="btn btn-secondary" (click)="scrollToElement(home)" (click)="cancelLogin()">Cancel</button>
                           </div>
                         </div>
@@ -154,7 +154,7 @@
           </div>
           <div class="service-item">
             <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png"/></div>
-            <h2>Birthdays/Party's</h2>
+            <h2>Birthdays</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis debitis rerum, magni voluptatem sed architecto placeat beatae tenetur officia quod</p>
           </div>
           <div class="service-item">

@@ -40,6 +40,7 @@ namespace BookingApp.API.Data
             var nxtMonth = month+1;
 
             var bookings = _context.Bookings
+                .Include(u => u.User)
                 .Where(b => b.When.Year == year)
                 .Where(b => b.When.Month >= prevMonth && b.When.Month <= nxtMonth) 
                 .AsQueryable().ToListAsync();

@@ -31,6 +31,7 @@ import { BookingEditStatusModalComponent } from 'src/app/booking/booking-edit-st
 import { Router } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
+import { TitleCasePipe } from '@angular/common';
 
 const colors: any = {
   red: {
@@ -102,7 +103,7 @@ export class AdminCalendarComponent implements OnInit {
       // tslint:disable-next-line: ban-types
       const event: Object = {
         id: res[i].id,
-        title: res[i].location,
+        title: res[i].location + ' (' + res[i].user.fullName + ')',
         meta: res[i].status,
         start: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), startTime.getHours(), startTime.getMinutes()),
         end: new Date(dayTime.getFullYear(), dayTime.getMonth(), dayTime.getDate(), endTime.getHours(), endTime.getMinutes()),

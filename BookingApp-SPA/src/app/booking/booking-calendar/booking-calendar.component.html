@@ -34,9 +34,9 @@
   </div>
 
   <div *ngIf="clickedDate && clickBooking == true" class="alert bg-signature text-center">
-    <h4 class="alert-heading">{{ clickedDate | date:'fullDate' }}</h4>
+    <h4 class="alert-heading text-white">{{ clickedDate | date:'fullDate' }}</h4>
 
-    <div *ngIf="this.dayEvents.length == 0">
+    <div *ngIf="this.dayEvents.length == 0" class="text-white">
       <span>No bookings here yet. Be the first to book a time slot! </span>
     </div>
 
@@ -44,7 +44,7 @@
       <div *ngIf="day.meta === 'Approved'">{{day.start| date:'shortTime'}} - {{day.end| date:'shortTime'}} is already booked</div>
     </div>
 
-    <form class="container mt-1" [formGroup]="bookingForm" (ngSubmit)="registerBooking(template)">
+    <form class="container mt-1 text-white" [formGroup]="bookingForm" (ngSubmit)="registerBooking(template)">
       <div class="row justify-content-center">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="form-group">
@@ -79,8 +79,8 @@
 
             <div class="form-group text-center">
               <div class="btn-group" role="group">          
-                <button class="btn btn-success" type="submit" [disabled]="!bookingForm.valid" >Submit</button>
-                <button class="btn btn-info" type="button" (click)="cancel()">Cancel</button>
+                <button class="btn btn-info" type="submit" [disabled]="!bookingForm.valid" >Submit</button>
+                <button class="btn btn-secondary" type="button" (click)="cancel()">Cancel</button>
               </div>
             </div>
 
