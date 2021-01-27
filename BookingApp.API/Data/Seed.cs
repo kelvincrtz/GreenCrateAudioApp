@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Options;
 using BookingApp.API.Helpers;
+using System;
 
 namespace BookingApp.API.Data
 {
@@ -15,6 +16,7 @@ namespace BookingApp.API.Data
         {
             string userString = Startup.StaticConfig.GetSection("AdminSettings:UName").Value;
             string fullNameString = Startup.StaticConfig.GetSection("AdminSettings:FullName").Value;
+            string contactNumberString = Startup.StaticConfig.GetSection("AdminSettings:Contact").Value;
 
             if (!userManager.Users.Any())
             {
@@ -45,7 +47,10 @@ namespace BookingApp.API.Data
                 var adminUser = new User
                 {
                     UserName = userString,
-                    FullName = fullNameString
+                    FullName = fullNameString,
+                    ContactNumber = contactNumberString,
+                    Created = DateTime.Now
+                    // TEST THIS ONCE SITE IS IN PRE-PUBLISHING
                 };
 
                 var result = userManager.CreateAsync(adminUser, Startup.StaticConfig.GetSection("AdminSettings:Poken").Value).Result;
