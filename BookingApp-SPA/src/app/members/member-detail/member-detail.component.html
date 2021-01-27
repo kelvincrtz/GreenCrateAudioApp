@@ -104,9 +104,9 @@
                 <div *ngFor="let message of messages">
                   <alert [type]='"info"' [dismissible]="dismissible" (onClosed)="onClosedMessage(message.id, message.recipientId)">
                     <h4 class="alert-heading">Message!</h4>
-                    <a [routerLink]="['/members/', message.senderId]" class="alert-link" (click)="markMessageNotified(message.id, message.recipientId)">
-                        <span *ngIf="message.senderFullName != 'Administrator'">You have a new message from {{message.senderFullName}}</span>
-                        <span *ngIf="message.senderFullName === 'Administrator'">You have a new message from the {{message.senderFullName}}</span>
+                      <a [routerLink]="['/members/', message.senderId]" class="alert-link" (click)="markMessageNotified(message.id, message.recipientId)">
+                          <span *ngIf="message.senderFullName != 'Admin'">You have a new message from {{message.senderFullName}}</span>
+                          <span *ngIf="message.senderFullName === 'Admin'">You have a new message from the {{message.senderFullName}}</span>
                       </a>
                     <div>
                       <span class="small">Sent on {{message.messageSent | date : 'fullDate'}}</span>
