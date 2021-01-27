@@ -511,6 +511,14 @@ pre {
 }
 /* End About Section */
 
+/* FAQs */
+.faqcontainer{
+	flex-direction: column;
+	max-width: 1200px;
+	margin: 0 auto;
+	margin-bottom: 70px;
+}
+
 /* contact Section */
 #contact .contact {
 	flex-direction: column;

@@ -78,6 +78,7 @@
           <a (click)="scrollToElement(testimonials)" type="button" class="cta">Reviews</a>
           <a *ngIf="!loggedIn()" (click)="scrollToElement(login)" type="button" class="cta">Log in</a>
           <a *ngIf="!loggedIn()" (click)="scrollToElement(register)" (click)="registerToggle()" type="button" class="cta">Sign Up</a>
+          <a (click)="scrollToElement(faqs)" type="button" class="cta">FAQS</a>
         </div>
       </div>
     </section>
@@ -202,7 +203,7 @@
       <div class="about container">
         <div class="col-left">
           <div class="about-img">
-            <img src="../../assets/susan.jpg" alt="img">
+            <img src="../../assets/mike.jpeg" alt="img">
           </div>
         </div>
         <div class="col-right">
@@ -219,6 +220,36 @@
       <!-- Something similar to contact section -->
     </section>
     <!-- End About Section -->
+
+        <!-- FAQs Section -->
+        <section #faqs id="faqs">
+          <div class="faqcontainer">
+            <div><h1 class="section-title">Frequently Asked <span>Questions</span></h1></div>
+            <br>
+            <br>
+            <accordion class="" [isAnimated]="true" [closeOthers]="oneAtATime">
+              <accordion-group class="button" heading="How much does a booking cost?">
+                <div class="font-weight-light">A booking fee is from $65 per hour depending on your location.</div>
+              </accordion-group>
+              <accordion-group heading="How many bookings do I need?">
+                <div class="font-weight-light">For zero knowledge, 3-5 lessons is enough depending on the learning skill and experience of each individual. After your first lesson, your driving instructor will let you know how many more lessons you will need.</div>
+              </accordion-group>
+              <accordion-group heading="What license do I need to have in order to book a birthday party?">
+                <div class="font-weight-light">You will need to have any of the following: a NZ Learners Licence, Restricted Licence or Overseas Licence. </div>
+              </accordion-group>
+              <accordion-group heading="How long is each booking?">
+                <div class="font-weight-light">Each lesson varies from 1-2 hours.</div>
+              </accordion-group>
+              <accordion-group heading="I don’t have a car. Can I still take driving lessons?">
+                <div class="font-weight-light">Yes, you can. All of our instruction vehicles are fitted with dual controls for safety.</div>
+              </accordion-group>
+              <accordion-group heading="Can I use my own audio gear during a booking?">
+                <div class="font-weight-light">Yes, depending on your driving experience. </div>
+              </accordion-group>
+            </accordion>
+          </div>
+        </section>
+        <!-- End of FAQs Section-->
   
     <!-- Contact Section -->
     <section #contact id="contact">

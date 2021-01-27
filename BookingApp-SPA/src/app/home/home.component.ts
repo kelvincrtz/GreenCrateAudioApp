@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   reviews: Review[];
   loginForm: FormGroup;
   navbarOpen = false;
+  oneAtATime = true;
 
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router,
               private route: ActivatedRoute) { }
