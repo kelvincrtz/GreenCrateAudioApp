@@ -70,8 +70,8 @@
     </div>
 
 
-    <div *ngIf="user.id == authDecodeToken && bookings?.length" class="col-sm-12 col-md-12 col-lg-6 mt-2">
-      <div class="card bg-signature text-white">
+    <div *ngIf="bookings?.length || messages?.length" class="col-sm-12 col-md-12 col-lg-6 mt-2">
+      <div *ngIf="user.id == authDecodeToken" class="card bg-signature text-white">
         <div class="card-body">
           <div class="body-custom2 bg-signature">
             <div class="container">

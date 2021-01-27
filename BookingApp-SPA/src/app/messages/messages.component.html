@@ -13,8 +13,16 @@
     </div>
   </div>
 
-  <div class="row mt-2" *ngIf="messages.length == 0">
+  <div class="row mt-2" *ngIf="messages.length == 0 && this.messageContainer == 'Unread'">
     <h3>No unread messages</h3>
+  </div>
+
+  <div class="row mt-2" *ngIf="messages.length == 0 && this.messageContainer == 'Inbox'">
+    <h3>No messages</h3>
+  </div>
+
+  <div class="row mt-2" *ngIf="messages.length == 0 && this.messageContainer == 'Outbox'">
+    <h3>No sent messages</h3>
   </div>
 
   <div class="row mt-4" *ngIf="messages.length > 0">

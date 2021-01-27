@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Booking } from 'src/app/_models/booking';
 import { BookingService } from 'src/app/_services/booking.service';
@@ -20,6 +20,7 @@ export class MemberDetailComponent implements OnInit {
   messages: Message[];
   authDecodeToken: any;
   authDecodeName: any;
+  routeIdUser: any;
 
   dismissible = true;
   alerts: any;
@@ -37,6 +38,8 @@ export class MemberDetailComponent implements OnInit {
 
     this.loadNofifyBookings();
     this.loadNofifyMessages();
+
+    this.alertify.success(this.user.id + ' ' + this.authDecodeToken);
   }
 
   onClosed(bookingId: any) {
