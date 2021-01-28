@@ -56,7 +56,6 @@ pre {
 	padding: 10px 30px;
 	color: white;
 	background-color: transparent;
-	border: 2px solid rgb(41, 160, 11);
 	font-size: 2rem;
 	text-transform: uppercase;
 	letter-spacing: .1rem;
@@ -248,17 +247,6 @@ pre {
 /* End of Log in Section */
 
 /* Services Section */
-#services .service-item {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.336);
-    transition: 0.3s;
-  }
-  
-/* On mouse-over, add a deeper shadow */
-#services .service-item:hover {
-    box-shadow: 0 15px 20px 0 rgba(0,0,0,0.2);
-}
-
 #services .services {
 	flex-direction: column;
 	text-align: center;
@@ -284,13 +272,13 @@ pre {
 	justify-content: center;
 	flex-direction: column;
 	padding: 30px;
-	border-radius: 10px;
 	background-image: url();
 	background-size: cover;
 	margin: 10px 5%;
 	position: relative;
 	z-index: 1;
 	overflow: hidden;
+	border-radius: 10px;
 }
 #services .service-item::after {
 	content: '';
@@ -299,7 +287,6 @@ pre {
 	top: 0;
 	height: 100%;
 	width: 100%;
-	background-color: rgb(41, 160, 11);
 	opacity: .7;
 	z-index: -1;
 }
@@ -321,6 +308,14 @@ pre {
 #services .service-item pre {
 	color: rgb(29, 27, 27);
 	text-align: left;
+}
+
+.card-container {
+	min-height: 70vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 /* End Services Section */
 
@@ -446,7 +441,6 @@ pre {
 	padding: 10px 30px;
 	color: white;
 	background-color: transparent;
-	border: 7px solid rgb(41, 160, 11);;
 	font-size: 2rem;
 	text-transform: uppercase;
 	letter-spacing: .1rem;
@@ -532,7 +526,6 @@ pre {
 	width: 80%;
 	padding: 20px;
 	text-align: center;
-	border-radius: 10px;
 	padding: 30px;
 	margin: 30px;
 	display: flex;
