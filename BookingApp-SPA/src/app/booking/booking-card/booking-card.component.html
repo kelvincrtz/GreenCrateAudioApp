@@ -81,7 +81,7 @@
         <p class="card-text">When: {{booking.when | date}}</p>
       </div>
 
-      <button class="btn bg-cancelled-custom btn-block my-2 text-white" tooltip="This request has been Cancelled by the user" [delay]="500" [routerLink]="['/member', booking.userId]">Message User</button>
+      <button class="btn bg-cancelled-custom btn-block my-2 text-white" tooltip="This request has been Cancelled by the user" [delay]="500" [routerLink]="['/members/', booking.userId]">Message User</button>
     </div>
     <div class="card-footer bg-transparent text-dark">
       <small>Request received: {{booking.dateAdded | date}}</small>

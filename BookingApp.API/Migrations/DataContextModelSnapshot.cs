@@ -113,9 +113,6 @@ namespace BookingApp.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("BookingId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("TEXT");
 
@@ -138,8 +135,6 @@ namespace BookingApp.API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookingId");
 
                     b.HasIndex("UserId");
 
@@ -401,12 +396,6 @@ namespace BookingApp.API.Migrations
 
             modelBuilder.Entity("BookingApp.API.Models.Review", b =>
                 {
-                    b.HasOne("BookingApp.API.Models.Booking", "Booking")
-                        .WithMany()
-                        .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BookingApp.API.Models.User", "User")
                         .WithMany("Reviews")
                         .HasForeignKey("UserId")

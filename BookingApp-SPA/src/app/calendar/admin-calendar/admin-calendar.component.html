@@ -112,7 +112,7 @@
       </div>
 
       <div class="modal-footer btn-group" role="group" *ngIf="booking.status == 'Cancelled'">
-        <button type="button" class="btn btn-dark" (click)="messageUser(booking.id)">Message User</button>
+        <button type="button" class="btn btn-warning" (click)="messageUser(booking.id)">Message User</button>
         <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">Cancel</button>
       </div>
 

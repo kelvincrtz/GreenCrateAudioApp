@@ -150,8 +150,6 @@ namespace BookingApp.API.Controllers
                 return Unauthorized();
 
              var userFromRepo = await _repo.GetUser(userId);
-
-             var bookingFromRepo = await _repo.GetBooking(reviewForCreationDto.BookingId);
              
              var file = reviewForCreationDto.File;
 

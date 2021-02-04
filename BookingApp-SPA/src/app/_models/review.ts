@@ -12,6 +12,4 @@ export interface Review {
     rating: number;
     user?: User;
     userId?: number;
-    bookingId?: number;
-    booking?: Booking;
 }

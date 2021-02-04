@@ -28,7 +28,7 @@
             </span>
             <div class="chat-body">
               <div class="header">
-                  <small class="text-muted">
+                  <small class="">
                       <small>{{message.messageSent | date : 'shortTime'}}</small>
                       <small *ngIf="!message.isRead" class="text-danger"> (unread)</small>
                       <small *ngIf="message.isRead" class="text-success"> (Read {{message.dateRead | date : 'short'}})</small>

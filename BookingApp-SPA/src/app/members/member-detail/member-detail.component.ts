@@ -38,8 +38,6 @@ export class MemberDetailComponent implements OnInit {
 
     this.loadNofifyBookings();
     this.loadNofifyMessages();
-
-    this.alertify.success(this.user.id + ' ' + this.authDecodeToken);
   }
 
   onClosed(bookingId: any) {

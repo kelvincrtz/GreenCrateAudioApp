@@ -9,7 +9,7 @@
     <div class="">Use this page to manage all your booking requests.</div>
     <div>Wait for the Administrator to process and review your booking request. You will be notified and if its <strong>approved</strong>, you can start making the payment.</div>
     <div>You can also write a review once you've completed your booking</div>
-    <div class=""><small class="text-muted">NOTE:</small> You are not allowed to edit any request that has been <strong>Approved</strong> or <strong>Declined</strong></div>
+    <div class=""><small>NOTE:</small> You are not allowed to edit any request that has been <strong>Approved</strong> or <strong>Declined</strong></div>
   </div>
   <hr>
 
@@ -118,7 +118,7 @@
               <div *ngIf="booking.status == 'Approved'">
                 <div *ngIf="!booking.isReviewed && !compareDates(booking.when)" class="btn-group btn-block btn-group-sm">
                   <button class="btn btn-outline-info btn-sm mt-2" (click)="paymentInfo(template2)">Payment Info</button>
-                  <button class="btn btn-secondary btn-sm mt-2" (click)="cancelInfo(template3)">Cancel Booking</button>
+                  <button class="btn btn-outline-warning btn-sm mt-2" (click)="cancelInfo(template3)">Cancel Booking</button>
                 </div>
 
                 <button *ngIf="!booking.isReviewed && compareDates(booking.when)" class="btn btn-outline-info btn-block btn-sm mt-2" (click)="review(booking.id)">Want to write a review? 

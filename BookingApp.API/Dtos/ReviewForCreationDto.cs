@@ -21,10 +21,6 @@ namespace BookingApp.API.Dtos
 
         public int Rating { get; set; }
 
-        public int BookingId { get; set; }
-
-        public Booking Booking { get; set; }
-
         public ReviewForCreationDto()
         {
             DateAdded = DateTime.Now;   
