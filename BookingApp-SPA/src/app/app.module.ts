@@ -5,7 +5,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 // tslint:disable-next-line: max-line-length
-import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule, AlertModule, TooltipModule, CollapseModule, RatingModule, CarouselModule, AccordionModule } from 'ngx-bootstrap';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { RatingModule } from 'ngx-bootstrap/rating';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TimeAgoPipe } from 'time-ago-pipe';

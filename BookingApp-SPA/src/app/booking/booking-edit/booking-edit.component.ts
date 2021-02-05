@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { Booking } from 'src/app/_models/booking';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { BookingService } from 'src/app/_services/booking.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';

@@ -5,7 +5,7 @@ import { MessageService } from '../_services/message.service';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-messages',

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { Booking } from 'src/app/_models/booking';
 import { BookingService } from 'src/app/_services/booking.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { ActivatedRoute, Router } from '@angular/router';

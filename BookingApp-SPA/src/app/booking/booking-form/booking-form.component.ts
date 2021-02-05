@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
 import { Booking } from 'src/app/_models/booking';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BookingService } from 'src/app/_services/booking.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Router } from '@angular/router';

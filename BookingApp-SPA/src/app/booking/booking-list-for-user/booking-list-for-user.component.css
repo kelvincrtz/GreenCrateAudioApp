@@ -23,10 +23,6 @@
     text-align: center; 
 }
 
-hr {
-    border-color: rgb(60, 119, 207);
-}
-
 @-webkit-keyframes pulse {
     0% { background-color: #eeff00; }
     50% { background-color: #FFF; }
