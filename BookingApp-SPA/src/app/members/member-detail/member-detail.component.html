@@ -21,7 +21,7 @@
             <div class="container">
               <h1 class="display-4">{{user.fullName | titlecase}}</h1>
               <p id="smallertext1"  *ngIf="user.city!= null || user.country != null" class="lead text-white">Lives in {{user.city + ', '}} {{user.country}}</p>
-              <p id="smallertext1" *ngIf="user.contactNumber!= ''" class="lead text-white">Contact number: {{user.contactNumber}}</p>
+              <p id="smallertext1" *ngIf="user.contactNumber!= null" class="lead text-white">Contact number: {{user.contactNumber}}</p>
               <p id="smallertext1"  class="lead text-white">Last active: {{user.lastActive | date : 'medium' }}</p>
               <p id="smallertext1"  *ngIf="user.id == authDecodeToken || authDecodeName === 'admin'" class="lead text-white">Member since: {{user.created | date }}</p>
               <p id="smallertext1"  *ngIf="user.id == authDecodeToken || authDecodeName === 'admin'" class="lead text-white">{{user.bookings.length}} total number of booking request</p>
