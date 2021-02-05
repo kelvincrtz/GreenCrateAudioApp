@@ -1,18 +1,5 @@
 [
   {
-    "Username": "Reynold",
-    "Password": "password",
-    "Gender": "male",
-    "DateOfBirth": "1958-02-02",
-    "FullName": "Reynold Rey",
-    "ContactNumber": "0021331919",
-    "Created": "2018-04-23",
-    "LastActive": "2018-04-23",
-    "City": "Thatcher",
-    "Country": "Myanmar",
-    "Bookings": null
-  },
-  {
     "Username": "Poter",
     "Password": "password",
     "Gender": "male",
@@ -26,19 +13,6 @@
     "Bookings": null
   },
   {
-    "Username": "Juarez",
-    "Password": "password",
-    "Gender": "male",
-    "DateOfBirth": "1961-10-05",
-    "FullName": "Juarez Juan",
-    "ContactNumber": "0021331919",
-    "Created": "2019-12-06",
-    "LastActive": "2019-12-06",
-    "City": "Byrnedale",
-    "Country": "Norway",
-    "Bookings": null
-  },
-  {
     "Username": "Rosario",
     "Password": "password",
     "Gender": "female",
@@ -49,19 +23,6 @@
     "LastActive": "2018-08-12",
     "City": "Groveville",
     "Country": "Spain",
-    "Bookings": null
-  },
-  {
-    "Username": "Bowers",
-    "Password": "password",
-    "Gender": "female",
-    "DateOfBirth": "1965-12-17",
-    "FullName": "Bowers Bo",
-    "ContactNumber": "0021331919",
-    "Created": "2018-01-12",
-    "LastActive": "2018-01-12",
-    "City": "Haena",
-    "Country": "South Africa",
     "Bookings": null
   }
 ]
