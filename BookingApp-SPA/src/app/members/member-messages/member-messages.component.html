@@ -31,7 +31,7 @@
                   <small class="">
                       <small>{{message.messageSent | date : 'shortTime'}}</small>
                       <small *ngIf="!message.isRead" class="text-danger"> (unread)</small>
-                      <small *ngIf="message.isRead" class="text-success"> (Read {{message.dateRead | date : 'short'}})</small>
+                      <small *ngIf="message.isRead" class="text-secondary"> (Read {{message.dateRead | date : 'short'}})</small>
                   </small>
                 <strong class="primary-font float-right text-capitalize">{{message.senderFullName.split(' ')[0]}}</strong>
               </div>

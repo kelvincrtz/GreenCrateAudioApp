@@ -14,10 +14,10 @@ namespace BookingApp.API.Models
         public DateTime LastActive { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public ICollection<Booking> Bookings { get; set; }
-        public ICollection<Message> MessagesSent { get; set; }
-        public ICollection<Message> MessagesReceived { get; set; }
-        public ICollection<Review> Reviews { get; set; }
-        public ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
+        public virtual ICollection<Message> MessagesSent { get; set; }
+        public virtual ICollection<Message> MessagesReceived { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

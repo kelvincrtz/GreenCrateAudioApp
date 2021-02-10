@@ -11,7 +11,7 @@ namespace BookingApp.API.Models
         public bool IsApproved { get; set; }
         public string PublicId { get; set; }
         public int Rating { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
         public int UserId { get; set; }
     }
 }

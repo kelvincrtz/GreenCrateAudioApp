@@ -5,3 +5,4 @@ obj
 appsettings.json
 bookingappaudio.db-shm
 bookingappaudio.db-wal
+wwwroot

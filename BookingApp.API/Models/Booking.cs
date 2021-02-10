@@ -15,7 +15,7 @@ namespace BookingApp.API.Models
         public bool IsSeenByAdmin { get; set; }
         public bool IsSeenNotification { get; set; }
         public DateTime ApproveOrDeclineDate { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
         public int UserId { get; set; }
         public bool IsReviewed { get; set; }
     }

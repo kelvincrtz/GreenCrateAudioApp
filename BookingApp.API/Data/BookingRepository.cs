@@ -31,7 +31,7 @@ namespace BookingApp.API.Data
 
         public async Task<Booking> GetBooking(int id)
         {
-            return await _context.Bookings.Include(u => u.User).FirstOrDefaultAsync(b => b.Id == id);
+            return await _context.Bookings.FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task<IEnumerable<Booking>> GetCalendarBookings(int year, int month)
@@ -40,7 +40,6 @@ namespace BookingApp.API.Data
             var nxtMonth = month+1;
 
             var bookings = _context.Bookings
-                .Include(u => u.User)
                 .Where(b => b.When.Year == year)
                 .Where(b => b.When.Month >= prevMonth && b.When.Month <= nxtMonth) 
                 .AsQueryable().ToListAsync();
@@ -50,8 +49,7 @@ namespace BookingApp.API.Data
 
         public async Task<PagedList<Booking>> GetBookings(BookingParams bookingParams)
         {
-            var bookings = _context.Bookings.Include(u => u.User)
-                .OrderByDescending(b => b.DateAdded).AsQueryable();
+            var bookings = _context.Bookings.OrderByDescending(b => b.DateAdded).AsQueryable();
 
             //Get the current Month, Year and Day 
             var month = DateTime.Now.Month;
@@ -64,11 +62,11 @@ namespace BookingApp.API.Data
             }
 
             if (bookingParams.EventsToday) {
-                bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month && b.When.Day == day);
+                bookings = bookings.Where(b => (b.When.Year == year && b.When.Month == month) && b.When.Day == day);
             }
 
             if (bookingParams.EventsTomorrow) {
-                bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month && b.When.Day == dayPlusOne.Day);
+                bookings = bookings.Where(b => (b.When.Year == year && b.When.Month == month) && b.When.Day == dayPlusOne.Day);
             }
 
             if (bookingParams.Status!=null) {
@@ -119,11 +117,11 @@ namespace BookingApp.API.Data
             }
 
             if (bookingParams.EventsToday) {
-                bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month && b.When.Day == day);
+                bookings = bookings.Where(b => (b.When.Year == year && b.When.Month == month) && b.When.Day == day);
             }
 
             if (bookingParams.EventsTomorrow) {
-                bookings = bookings.Where(b => b.When.Year == year && b.When.Month == month && b.When.Day == dayPlusOne.Day); 
+                bookings = bookings.Where(b => (b.When.Year == year && b.When.Month == month) && b.When.Day == dayPlusOne.Day); 
             }
 
             if (!string.IsNullOrEmpty(bookingParams.OrderBy))
@@ -150,8 +148,6 @@ namespace BookingApp.API.Data
         public async Task<IEnumerable<Message>> GetNotificationMessagesForUser(int userId)
         {
             var messages = _context.Messages
-                .Include(u => u.Sender)
-                .Include(u => u.Recipient)
                 .Where(u => u.RecipientId == userId && u.IsRead == false && u.DateRead == null)
                 .Where(u => u.IsSeenNotification == false)
                 .AsQueryable().ToListAsync();
@@ -162,7 +158,7 @@ namespace BookingApp.API.Data
         public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
         {
             // Includes the other navigation property here. Might be a tool for fixing un-identified
-            var messages = _context.Messages.Include(u => u.Sender).Include(u => u.Recipient).AsQueryable();
+            var messages = _context.Messages.AsQueryable();
 
             switch (messageParams.MessageContainer)
             {
@@ -185,7 +181,7 @@ namespace BookingApp.API.Data
 
         public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
         {
-            var messages = await _context.Messages.Include(u => u.Sender).Include(u => u.Recipient)
+            var messages = await _context.Messages
                 .Where(m => m.RecipientId == userId && m.RecipientDeleted == false && m.SenderId == recipientId 
                          || m.RecipientId == recipientId && m.SenderId == userId && m.SenderDeleted == false)
                 .OrderBy(m => m.MessageSent).ToListAsync();
@@ -195,7 +191,7 @@ namespace BookingApp.API.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.Include(b => b.Bookings).Include(m => m.MessagesReceived)
+            var user = await _context.Users
                 .Include(r => r.Reviews).FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
@@ -203,7 +199,7 @@ namespace BookingApp.API.Data
         
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _context.Users.Include(b => b.Bookings).OrderByDescending(u => u.LastActive).AsQueryable();
+            var users = _context.Users.OrderByDescending(u => u.LastActive).AsQueryable();
 
             if(!string.IsNullOrEmpty(userParams.OrderBy))
             {
@@ -228,14 +224,14 @@ namespace BookingApp.API.Data
 
         public async Task<Review> GetReview(int id)
         {
-            var review =  await _context.Reviews.Include(u => u.User).FirstOrDefaultAsync(r => r.Id == id);
+            var review =  await _context.Reviews.FirstOrDefaultAsync(r => r.Id == id);
 
             return review;
         }
 
         public async Task<IEnumerable<Review>> GetReviewsForHomePage()
         {
-            var reviews = await _context.Reviews.Include(u => u.User).Where(r => r.IsApproved == true)
+            var reviews = await _context.Reviews.Where(r => r.IsApproved == true)
                 .OrderByDescending(d => d.DateAdded).Take(6).ToListAsync();
 
             return reviews;
@@ -243,7 +239,7 @@ namespace BookingApp.API.Data
 
         public async Task<PagedList<Review>> GetMoreReviews(ReviewParams reviewParams)
         {
-            var reviews = _context.Reviews.Include(u => u.User).Where(r => r.IsApproved == true)
+            var reviews = _context.Reviews.Where(r => r.IsApproved == true)
                 .OrderByDescending(d => d.DateAdded);
 
             return await PagedList<Review>.CreateAsync(reviews, reviewParams.PageNumber, reviewParams.PageSize);
@@ -251,7 +247,7 @@ namespace BookingApp.API.Data
 
         public async Task<PagedList<Review>> GetReviewsForUser(int userId, ReviewParams reviewParams)
         {
-            var reviews = _context.Reviews.Include(u => u.User).Where(u => u.UserId == userId)
+            var reviews = _context.Reviews.Where(u => u.UserId == userId)
                 .OrderByDescending(d => d.DateAdded);
 
             return await PagedList<Review>.CreateAsync(reviews, reviewParams.PageNumber, reviewParams.PageSize);
@@ -259,7 +255,7 @@ namespace BookingApp.API.Data
 
         public async Task<PagedList<Review>> GetReviewsForAdmin(ReviewParams reviewParams)
         {
-            var reviews = _context.Reviews.Include(u => u.User).OrderByDescending(d => d.DateAdded);
+            var reviews = _context.Reviews.OrderByDescending(d => d.DateAdded);
 
             return await PagedList<Review>.CreateAsync(reviews, reviewParams.PageNumber, reviewParams.PageSize);
         }

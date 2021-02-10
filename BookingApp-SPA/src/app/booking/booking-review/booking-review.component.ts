@@ -76,10 +76,6 @@ export class BookingReviewComponent implements OnInit {
 
   uploadSection(template: TemplateRef<any>) {
 
-    if (this.rating <= 3 ) {
-      this.modalRef2.hide();
-    }
-
     if (this.reviewForm.valid) {
       this.review = Object.assign({}, this.reviewForm.value);
 
